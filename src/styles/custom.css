@@ -1,0 +1,1137 @@
+:root{
+  --ink: #1f1218;               /* Deep dark plum for readable text */
+  --paper: rgba(255, 240, 245, 0.85); /* Soft transparent pink background */
+  --brass: #ff69b4;             /* Bright Pink for accents & highlights */
+  --wine: #d81b60;              /* Deep Rose Pink */
+  --sand: #f8bbd0;              /* Light blush pink */
+  --line: rgba(216, 27, 96, 0.15); /* Soft pink dividers */
+  --line-light: rgba(255, 255, 255, 0.25);
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background: linear-gradient(135deg, rgba(255,192,203,0.3) 0%, rgba(255,240,245,0.7) 100%), var(--paper);
+  color:var(--ink);
+  font-family:'Jost', sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4, .display{
+  font-family:'Fraunces', serif;
+  letter-spacing:-0.01em;
+}
+
+.eyebrow{
+  font-family:'Jost', sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--wine);
+}
+
+.frame-tag{
+  font-family:'Jost', monospace, sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.15em;
+  color: currentColor;
+  opacity:0.55;
+}
+
+
+/* ---------- MARQUEE STRIP ---------- */
+.strip{
+  background: rgba(255, 105, 180, 0.85);
+  backdrop-filter: blur(4px);
+  color:#fff;
+  padding:0.65rem 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.strip .track{
+  display:inline-block;
+  padding-left:100%;
+  animation: marquee 26s linear infinite;
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-size:1rem;
+  letter-spacing:0.02em;
+}
+.strip .track span{ margin:0 1.6rem; }
+@keyframes marquee{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-100%); }
+}
+
+
+
+
+/* ---------- PHILOSOPHY ---------- */
+.philosophy{
+  background: rgba(216, 27, 96, 0.9);
+  backdrop-filter: blur(8px);
+  color:#fff;
+  padding:6rem 0;
+  position:relative;
+}
+.philosophy .display{
+  font-size:clamp(1.9rem,3.4vw,2.9rem);
+  font-weight:300;
+  font-style:italic;
+  line-height:1.35;
+  color:#fff;
+}
+.philosophy .signature{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-size:1.1rem;
+  color:var(--sand);
+  margin-top:1.6rem;
+}
+
+/* ---------- GALLERY ---------- */
+.gallery{ padding:6rem 0; }
+.gallery-grid{
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows:130px;
+  gap:8px;
+}
+.gallery-grid img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:6px;
+  transition:.5s ease;
+  cursor: zoom-in;
+}
+.gallery-grid img:hover{ transform: scale(1.01); }
+.g1{ grid-column:span 3; grid-row:span 3; }
+.g2{ grid-column:span 3; grid-row:span 2; }
+.g3{ grid-column:span 3; grid-row:span 2; }
+.g4{ grid-column:span 2; grid-row:span 2; }
+.g5{ grid-column:span 2; grid-row:span 2; }
+.g6{ grid-column:span 2; grid-row:span 2; }
+
+/* ---------- LIGHTBOX ---------- */
+.lightbox-overlay{
+  position:fixed; inset:0;
+  background:rgba(31, 18, 24, 0.92);
+  backdrop-filter: blur(8px);
+  z-index:2000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity .35s ease;
+  padding: 2rem;
+}
+.lightbox-overlay.active{ opacity:1; visibility:visible; }
+.lightbox-overlay img{
+  max-width:min(880px, 90vw);
+  max-height:80vh;
+  object-fit:contain;
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  transform: scale(0.96);
+  transition: transform .35s ease;
+}
+.lightbox-overlay.active img{ transform: scale(1); }
+.lightbox-caption{
+  position:absolute;
+  bottom:2.2rem; left:0; right:0;
+  text-align:center;
+  color:var(--sand);
+  font-family:'Jost', sans-serif;
+  font-size:0.78rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+}
+.lightbox-caption .idx{
+  color:var(--brass);
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  letter-spacing:0;
+  text-transform:none;
+  margin-right:0.5rem;
+}
+.lightbox-close, .lightbox-prev, .lightbox-next{
+  position:absolute;
+  background:rgba(255,255,255,0.1);
+  border:1px solid var(--line-light);
+  color:#fff;
+  width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+  cursor:pointer;
+  border-radius: 50%;
+  transition:.25s ease;
+}
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{
+  background:var(--brass); color:#fff; border-color:var(--brass);
+}
+.lightbox-close{ top:1.5rem; right:1.5rem; }
+.lightbox-prev{ left:1.5rem; top:50%; transform:translateY(-50%); }
+.lightbox-next{ right:1.5rem; top:50%; transform:translateY(-50%); }
+
+/* ---------- TESTIMONIALS ---------- */
+.testimonials{
+  background:var(--ink);
+  color:#fff;
+  padding:6rem 0;
+  overflow:hidden;
+}
+.quote-mark{
+  font-family:'Fraunces', serif;
+  font-size:4rem;
+  color:var(--brass);
+  line-height:0.5;
+  font-style:italic;
+}
+.testimonials blockquote{
+  font-family:'Fraunces', serif;
+  font-size:1.5rem;
+  font-weight:300;
+  font-style:italic;
+  line-height:1.6;
+  color:var(--sand);
+  max-width:640px;
+  margin:0 auto;
+}
+.testimonials footer{
+  font-size:0.78rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--brass);
+  margin-top:1.3rem;
+}
+
+/* ---------- CONTACT ---------- */
+.contact{ padding:7rem 0; }
+.contact h2{ font-size:clamp(2.2rem,4vw,3.2rem); font-weight:500; }
+.form-control{
+  background:transparent;
+  border:none;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  padding:0.7rem 0.1rem;
+  font-family:'Jost', sans-serif;
+  font-size:0.95rem;
+  color:var(--ink);
+}
+.form-control:focus{
+  background:transparent;
+  box-shadow:none;
+  border-bottom:1px solid var(--wine);
+}
+
+/* ---------- FOOTER ---------- */
+footer.site-footer{
+  background:var(--ink);
+  color:var(--sand);
+  padding:3rem 0 2rem;
+  font-size:0.85rem;
+}
+footer.site-footer a{
+  color:var(--sand);
+  text-decoration:none;
+  margin-right:1.4rem;
+}
+footer.site-footer a:hover{ color:var(--brass); }
+footer .brand{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-size:1.3rem;
+  color:#fff;
+}
+
+
+
+
+/* ---------- NAV (WHITE & STICKY) ---------- */
+.navbar {
+  background: #ffffff !important;               /* Pure White Background */
+  position: sticky !important;                  /* Screen par fix rehne ke liye */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0.9rem 0;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);   /* Light shadow niche */
+  transition: all 0.3s ease;
+}
+
+/* Logo Color (Pink) */
+.navbar .navbar-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  color: #ff1493 !important;                     /* Hot Pink Logo */
+  letter-spacing: 0.02em;
+}
+
+.navbar .navbar-brand small {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: #d81b60;                                /* Darker Pink Subtitle */
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Nav Links Color (White background par dark text readable rehta hai) */
+.navbar .nav-link {
+  color: #1f1218 !important;                    /* Dark Text */
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0.85rem;
+  position: relative;
+  padding-bottom: 4px !important;
+  font-weight: 500;
+}
+
+/* Link Hover Effect */
+.navbar .nav-link::after {
+  content: "";
+  position: absolute; 
+  left: 0; 
+  bottom: 0;
+  width: 0; 
+  height: 2px;
+  background: #ff69b4;                          /* Pink underline on hover */
+  transition: width .3s ease;
+}
+
+.navbar .nav-link:hover::after { 
+  width: 100%; 
+}
+
+/* Dropdown Menu for White Background */
+.navbar .dropdown-menu {
+  background: #ffffff !important;
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.navbar .dropdown-item {
+  color: #1f1218 !important;
+}
+
+.navbar .dropdown-item:hover {
+  background: #ff69b4 !important;
+  color: #ffffff !important;
+}
+
+/* ===== SERVICES DROPDOWN (HOVER FIXED) ===== */
+
+/* Desktop Hover Functionality (992px and above) */
+@media (min-width: 992px) {
+  /* Parent li par relative & hover area secure karna */
+  .navbar .nav-item.dropdown {
+    position: relative;
+  }
+
+  /* Dropdown Menu Setup */
+  .navbar .dropdown-menu {
+    display: block !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    background: #ffffff !important;
+    border: 1px solid rgba(255, 105, 180, 0.2);
+    border-radius: 8px;
+    min-width: 220px;
+    padding: 8px 0;
+    margin-top: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  /* HOVER ACTION - Jab Link ya Parent par Hover ho */
+  .navbar .nav-item.dropdown:hover > .dropdown-menu,
+  .navbar .dropdown-menu:hover {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Hover Bridge: mouse smooth move hone ke liye overlay space */
+  .navbar .nav-item.dropdown::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    height: 10px;
+  }
+
+  /* Arrow Rotation on Hover */
+  .navbar .dropdown-toggle::after {
+    margin-left: .4rem;
+    transition: transform .3s ease;
+  }
+
+  .navbar .nav-item.dropdown:hover .dropdown-toggle::after {
+    transform: rotate(180deg);
+  }
+}
+
+/* Dropdown Item Styles */
+.navbar .dropdown-item {
+  color: #1f1218 !important;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar .dropdown-item:hover {
+  background: #ff69b4 !important;
+  color: #ffffff !important;
+}
+
+/* Mobile Click Toggle (991px and below) */
+@media (max-width: 991.98px) {
+  .navbar .dropdown-menu {
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    background: transparent !important;
+    border: none;
+    box-shadow: none;
+    padding-left: 15px;
+  }
+
+  .navbar .dropdown-menu.show {
+    display: block !important;
+  }
+}
+
+
+/* ---------- PREMIUM SERVICES CARDS ---------- */
+.services {
+  padding: 6rem 0;
+}
+
+.frame-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.8rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 105, 180, 0.15); /* Subtle pink border */
+  
+  /* Soft Luxury Shadow */
+  box-shadow: 0 10px 30px -10px rgba(31, 18, 24, 0.08);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden;
+}
+
+/* Card Hover Elevation Effect */
+.frame-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 105, 180, 0.4);
+  /* Rich Glowing Shadow on Hover */
+  box-shadow: 0 22px 45px -12px rgba(255, 20, 147, 0.18),
+              0 10px 20px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Index (01, 02) & Tag styling */
+.frame-card .frame-index {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.frame-card .frame-index .no {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ff1493; /* Pink Accent */
+}
+
+.frame-card .frame-index .tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+  background: rgba(255, 192, 203, 0.25);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* Image Wrapper with Zoom Effect */
+.frame-card a {
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+}
+
+.frame-card .photo {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.frame-card:hover .photo {
+  transform: scale(1.06); /* Smooth Cinematic Zoom */
+}
+
+/* Title & Text styling */
+.frame-card h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #1f1218;
+  margin-bottom: 0.6rem;
+  transition: color 0.3s ease;
+}
+
+.frame-card:hover h3 {
+  color: #ff1493; /* Title turns Pink on Hover */
+}
+
+.frame-card p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #5a5056;
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+
+
+/* ---------- PREMIUM ABOUT SECTION ---------- */
+.about {
+  padding: 7rem 0;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 240, 245, 0.4) 100%);
+  position: relative;
+}
+
+/* Image Container & Floating Frame Effects */
+.about-photo-wrap {
+  position: relative;
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px -15px rgba(31, 18, 24, 0.08);
+  border: 1px solid rgba(255, 105, 180, 0.2);
+}
+
+/* Backlit Soft Pink Overlay behind Image */
+.about-photo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  background: linear-gradient(135deg, rgba(255, 20, 147, 0.15), rgba(255, 182, 193, 0.3));
+  border-radius: 26px;
+  z-index: -1;
+  filter: blur(12px);
+}
+
+.about-photo-wrap img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+/* Est. 2016 Glassmorphism Floating Badge */
+.about-frame-label {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  background: rgba(31, 18, 24, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ff69b4;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.7rem 1.4rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 105, 180, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.05em;
+}
+
+/* Headings & Content Typography */
+.about .eyebrow {
+  color: #ff1493;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.about h2 {
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 600;
+  color: #1f1218;
+  line-height: 1.15;
+}
+
+.about-lead {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #d81b60;
+  border-left: 3px solid #ff69b4;
+  padding-left: 1rem;
+}
+
+.about-body {
+  color: #5a5056;
+  line-height: 1.8;
+  font-size: 0.98rem;
+}
+
+/* Stats Section Card Redesign */
+.about-stats {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 105, 180, 0.15);
+  gap: 12px;
+}
+
+.about-stats .stat {
+  background: #ffffff;
+  padding: 1.2rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 105, 180, 0.15);
+  box-shadow: 0 8px 20px -8px rgba(31, 18, 24, 0.06);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.about-stats .stat:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 105, 180, 0.4);
+  box-shadow: 0 12px 25px -8px rgba(255, 20, 147, 0.15);
+}
+
+.about-stats .stat .num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #ff1493;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.about-stats .stat .label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7a6a72;
+  font-weight: 500;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .about-stats {
+    row-gap: 12px;
+  }
+}
+
+/* ---------- OWL CAROUSEL STYLES ---------- */
+.photo-scroll-section {
+  padding: 4rem 0;
+  overflow: visible; /* Prevent Shadow Crop */
+}
+
+/* Outer Padding taaki shadow cut na ho */
+.photo-carousel .owl-stage-outer {
+  padding: 20px 0 30px 0;
+}
+
+/* Photo Card Wrapper with Premium Shadow */
+.photo-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  
+  box-shadow: 0 12px 30px -8px rgba(31, 18, 24, 0.1),
+              0 6px 16px -4px rgba(255, 20, 147, 0.12);
+  
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.photo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(255, 20, 147, 0.25),
+              0 8px 16px -2px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 105, 180, 0.5);
+}
+
+.photo-card img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.photo-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Image Bottom Gradient Overlay Label */
+.photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(31, 18, 24, 0.85) 100%);
+  color: #ffffff;
+  text-align: center;
+}
+
+.photo-caption span {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #ffb6c1;
+}
+
+/* ---------- CENTER BOTTOM BUTTONS & DOTS LAYOUT ---------- */
+
+/* Center Container for Nav & Dots */
+.photo-carousel .owl-nav {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Circular Nav Buttons Styling */
+.photo-carousel .owl-nav button.owl-prev,
+.photo-carousel .owl-nav button.owl-next {
+  width: 44px;
+  height: 44px;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  color: #1f1218 !important;
+  border: 1px solid rgba(255, 105, 180, 0.3) !important;
+  
+  box-shadow: 0 4px 15px rgba(31, 18, 24, 0.08);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.photo-carousel .owl-nav button.owl-prev:hover,
+.photo-carousel .owl-nav button.owl-next:hover {
+  background: #ff1493 !important;
+  color: #ffffff !important;
+  border-color: #ff1493 !important;
+  box-shadow: 0 6px 20px rgba(255, 20, 147, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Dots Styling (Middle Alignment) */
+.owl-theme .owl-dots {
+  margin-top: 20px !important;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 105, 180, 0.3) !important;
+  transition: all 0.3s ease;
+  margin: 0 4px !important;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #ff1493 !important;
+  width: 22px;
+  border-radius: 10px;
+}
+
+/* ==========================================
+   CLEAN & OPTIMIZED NAVBAR + MOBILE SIDEBAR
+========================================== */
+
+/* Main Header Bar */
+.custom-main-nav {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 10px 0 !important;
+  z-index: 1040;
+}
+
+/* Logo Resizing */
+.custom-logo {
+  max-height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 992px) {
+  .custom-logo {
+    max-height: 60px;
+  }
+}
+
+/* ------------------------------------------
+   DESKTOP NAVIGATION (Screen >= 992px)
+------------------------------------------ */
+@media (min-width: 992px) {
+  .custom-main-nav .navbar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  .custom-main-nav .nav-link {
+    color: #111111 !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 0 !important;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .custom-main-nav .nav-link:hover,
+  .custom-main-nav .nav-link.active {
+    color: #ff1493 !important;
+  }
+
+  /* Desktop Services Dropdown */
+  .custom-main-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block !important;
+    margin-top: 0;
+  }
+
+  .custom-main-nav .dropdown-menu {
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 200px;
+    background: #ffffff;
+    border: 1px solid rgba(255, 105, 180, 0.2);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .custom-main-nav .dropdown-item {
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .custom-main-nav .dropdown-item:hover {
+    background-color: #ff1493 !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Pink Enquire Button */
+.btn-pink-enquire {
+  background-color: #ff1493 !important;
+  color: #ffffff !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  padding: 8px 22px !important;
+  border-radius: 4px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-pink-enquire:hover {
+  background-color: #d81b60 !important;
+  color: #ffffff !important;
+}
+
+/* ------------------------------------------
+   MOBILE NAVIGATION & TOGGLER ICON (Screen < 992px)
+------------------------------------------ */
+@media (max-width: 991.98px) {
+  /* Mobile mein desktop links layout mess nahi karenge */
+  .custom-main-nav #desktopNavbarNav {
+    display: none !important;
+  }
+
+  .custom-main-nav .container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+  }
+}
+
+/* Mobile Hamburger Button */
+.custom-hamburger-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 6px 10px !important;
+  cursor: pointer;
+  z-index: 1050 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-hamburger-btn i,
+.custom-hamburger-btn .navbar-toggler-icon {
+  font-size: 1.6rem !important;
+  color: #ff1493 !important; /* Hot Pink Icon */
+}
+
+.custom-hamburger-btn:focus,
+.custom-hamburger-btn:active {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ------------------------------------------
+   MOBILE OFFCANVAS SIDEBAR STYLES
+------------------------------------------ */
+.custom-offcanvas-sidebar {
+  width: 300px !important;
+  background-color: #ffffff !important;
+  z-index: 1060 !important;
+}
+
+.sidebar-header-dark {
+  background-color: #1a1e36;
+  color: #ffffff;
+  padding: 16px 20px;
+}
+
+.sidebar-list {
+  background: #ffffff;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  color: #222222;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-link i {
+  width: 24px;
+  font-size: 1.05rem;
+  color: #ff1493 ;
+  margin-right: 8px;
+}
+
+.sidebar-link.active {
+  background-color: #fff5f7;
+  color: #ff1493;
+}
+
+.dropdown-arrow-box {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-submenu {
+  background-color: #f8fafc;
+}
+
+.submenu-link {
+  display: block;
+  padding: 10px 20px 10px 52px;
+  color: #555;
+  font-size: 0.88rem;
+  text-decoration: none;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.btn-action-call {
+  border-color: #ff1493 !important;
+  color: #ff1493 !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.btn-action-enquire {
+  background-color: #ff1493 !important;
+  border-color: #ff1493 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 992px) {
+  .custom-offcanvas-sidebar {
+    display: none !important;
+  }
+}
+
+/* 1. Prev & Next Buttons ko Circle banane ke liye */
+.custom-circle-btn {
+  width: 45px !important;
+  height: 45px !important;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black bg */
+  border-radius: 50% !important; /* Perfect circle */
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 15px; /* Side spacing */
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.custom-circle-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  opacity: 1;
+}
+
+/* 2. Indicators ko Round Bullets banane ke liye */
+.custom-dots button {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important; /* Circular bullets */
+  border: none !important;
+  margin: 0 5px !important;
+  background-color: #fff !important;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+/* Active bullet styling */
+.custom-dots button.active {
+  opacity: 1;
+  background-color: #0d6efd !important; /* Active indicator color (Bootstrap Primary Blue) */
+  transform: scale(1.2); /* Thoda bada dikhane ke liye */
+}
+
+
+  /* Base Gallery Layout */
+  .gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: 220px !important;
+    gap: 12px !important;
+  }
+
+  .gallery-grid img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 8px;
+    margin-bottom: 0 !important;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .gallery-grid img:hover {
+    transform: scale(1.02);
+  }
+
+  /* Tablet view (2 Columns) */
+  @media (max-width: 991px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      grid-auto-rows: 180px !important;
+      gap: 10px !important;
+    }
+  }
+
+  /* Mobile view (2 Columns for compact photos, or 1 column if small) */
+  @media (max-width: 576px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      grid-auto-rows: 150px !important;
+      gap: 8px !important;
+    }
+  }
+/* ---------- FLOATING ACTION BUTTONS ---------- */
+.floating-btns {
+  position: fixed;
+  right: 20px;
+  bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 9999;
+}
+
+.fab {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  transition: .3s;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+.call-btn {
+  background: #0d6efd;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+}
+
+.instagram-btn {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+}
+
+/* React Lightbox Custom Overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 18, 24, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
